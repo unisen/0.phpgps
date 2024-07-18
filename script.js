@@ -5,7 +5,7 @@
 
 // ALDEIA DOS SONHOS -16.8668179,-49.2877177
 
-// moon club -16.6956097,-49.2637254
+// moon club -16.6956097,-49.2637254  ~= 
 
 var Oficina = {
     posicao: {
