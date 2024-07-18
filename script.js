@@ -1,11 +1,19 @@
 // Objeto oficina com os dados da oficina
+// rua 36 setor marista -16.696646, -49.267684 / -16.6972777,-49.2681933
+// -16.6972777,-49.2681933,
+// T62 SETOR BELA VISTA -16.712235,-49.2674021
+
+// ALDEIA DOS SONHOS -16.8668179,-49.2877177
+
+// moon club -16.6956097,-49.2637254
+
 var Oficina = {
     posicao: {
-        latitude: -16.7122402, //-25.435946,
-        longitude: -49.2648218 //-49.273365	
+        latitude: -16.6956097, //-16.6972777, // -16.696646, //-16.7122402, //-25.435946,
+        longitude: -49.2637254 //-49.2681933 //-49.267684 //-49.2648218 //-49.273365	
     },
     valorPorKM: 5,
-    distanciaMaxima: 15,
+    distanciaMaxima: 2,
 
     // Funcao que ira verificar se o cliente esta por perto e ira calcular o valor do servico
     calculaOPreco: function(posicao) {
@@ -14,7 +22,10 @@ var Oficina = {
         if (distancia <= this.distanciaMaxima) {
             // Duas casas decimais e troca o . por ,
             var valor = (this.valorPorKM * distancia).toFixed(2).toString().replace('.', ',');
-            if (confirm('O custo do guincho será R$ ' + valor + '. Posso mandar?')) {
+            // Somente duas cadas decimais ja eh o suficiente
+            distancia = distancia.toFixed(2);
+
+            if (confirm('Você está a ' + distancia + ' KM. O custo do guincho será R$ ' + valor + '. Posso mandar?')) {
                 alert('O guincho chegará em alguns minutos!');
             }
         } else {
