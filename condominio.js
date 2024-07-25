@@ -1,4 +1,4 @@
-// Objeto oficina com os dados da oficina
+// Objeto Condominio com os dados da Condominio
 // rua 36 setor marista -16.696646, -49.267684 / -16.6972777,-49.2681933
 // -16.6972777,-49.2681933,
 // T62 SETOR BELA VISTA -16.712235,-49.2674021
@@ -8,13 +8,13 @@
 // -16.865917, -49.282889
 // moon club \ ~= 
 
-var Oficina = {
+var Condominio = {
     posicao: {
-        latitude: -16.6956097, //-16.6972777, // -16.696646, //-16.7122402, //-25.435946,
-        longitude: -49.2637254 //-49.2681933 //-49.267684 //-49.2648218 //-49.273365	
+        latitude: -16.865917, //-16.6972777, // -16.696646, //-16.7122402, //-25.435946,
+        longitude: -49.282889 //-49.2681933 //-49.267684 //-49.2648218 //-49.273365	
     },
     valorPorKM: 5,
-    distanciaMaxima: 2,
+    distanciaMaxima: 8,
 
     // Funcao que ira verificar se o cliente esta por perto e ira calcular o valor do servico
     calculaOPreco: function(posicao) {
@@ -45,7 +45,7 @@ var Localizacao = {
 
         // Funcao que serah chamada quando o browser retornar a posicao do usuario
         var sucesso = function(posicao) {
-            Oficina.calculaOPreco(posicao.coords);
+            Condominio.calculaOPreco(posicao.coords);
         };
 
         // Funcao que serah chamada caso de algum erro nesse processo de obter a posicao
@@ -97,3 +97,41 @@ var Distancia = {
 $(document).ready(function() {
     Localizacao.inicia();
 });
+
+// Chuck's Solution
+function getDistanceFromLatLonInKm2(lat1, lon1, lat2, lon2, units) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1); // deg2rad below
+    var dLon = deg2rad(lon2 - lon1);
+    var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    var miles = d / 1.609344;
+
+    if (units == 'km') {
+        return d;
+    } else {
+        return miles;
+    }
+}
+
+
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1); // deg2rad below
+    var dLon = deg2rad(lon2 - lon1);
+    var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+    return d;
+}
+
+function deg2rad(deg) {
+    return deg * (Math.PI / 180)
+}

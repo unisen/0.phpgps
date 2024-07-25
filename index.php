@@ -18,7 +18,14 @@
         <![endif]-->
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        
-        <script src="script.js?<?php echo time(); ?>" async defer></script>
+
+        <?php 
+            if(isset($_GET['cmd']) && $_GET['cmd'] == 'condominio') { ?>
+            <script src="condominio.js?<?php echo time(); ?>" async defer></script>
+           <?php } elseif(isset($_GET['cmd']) && $_GET['cmd'] == 'distancia') { ?>
+            <script src="distancia-functions.js?<?php echo time(); ?>" async defer></script>            
+            <?php } else { ?>
+                <script src="script.js?<?php echo time(); ?>" async defer></script>
+            <?php } ?>
     </body>
 </html>
